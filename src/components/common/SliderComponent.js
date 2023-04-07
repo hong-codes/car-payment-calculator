@@ -4,7 +4,7 @@ import { Stack, Typography } from "@mui/material";
 
 const SliderComponent = ({ defaultValue, min, max, step, onChange, value, label, unit, amount }) => {
   return (
-    <Fragment>
+    <Stack my={1.4}>
       {/* Fake Dom */}
       <Stack gap={1}>
         <Typography variant="h3">{label}</Typography>
@@ -25,7 +25,7 @@ const SliderComponent = ({ defaultValue, min, max, step, onChange, value, label,
         <Typography variant="caption" color="text.secondary">{unit} {min}</Typography>
         <Typography variant="caption" color="text.secondary">{unit} {max}</Typography>
       </Stack>
-    </Fragment>
+    </Stack>
   );
 };
 
