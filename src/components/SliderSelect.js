@@ -16,6 +16,10 @@ const SliderSelect = ({ data, setData }) => {
         step={100}
         onChange={(e, value) =>
           setData({
+            // using spread operator, ...data, keeps old data intact
+            ...data,
+            downPayment: value * 0.2,
+            loanAmount: value * 0.8,
             carValue: value,
           })
         }
@@ -24,33 +28,49 @@ const SliderSelect = ({ data, setData }) => {
       />
       <SliderComponent
         label="Down Payment"
-        min={1000}
-        max={30000}
-        defaultValue={15000}
-        step={1000}
-        onChange={(e, value) => console.log(value)}
+        min={0}
+        max={data.carValue}
+        defaultValue={data.downPayment}
+        value={data.downPayment}
+        step={100}
+        onChange={(e, value) =>
+          setData({
+            ...data,
+            loanAmount: (data.carValue - value), 
+            downPayment: value,
+          })
+        }
         unit="$"
-        amount={1000}
+        amount={data.downPayment}
       />
       <SliderComponent
-        label="Loan Value"
-        min={1000}
-        max={20000}
-        defaultValue={15000}
-        step={1000}
-        onChange={(e, value) => console.log(value)}
+        label="Loan Amount"
+        min={0}
+        max={data.carValue}
+        defaultValue={data.loanAmount}
+        value={data.loanAmount}
+        step={100}
+        onChange={(e, value) => setData({
+          ...data,
+          downPayment: (data.carValue - value),
+          loanAmount: value
+        })}
         unit="$"
-        amount={500}
+        amount={data.loanAmount}
       />
       <SliderComponent
         label="Interest Rate"
-        min={1}
-        max={10}
-        defaultValue={5}
-        step={0.1}
-        onChange={(e, value) => console.log(value)}
+        min={2}
+        max={18}
+        defaultValue={data.interestRate}
+        value={data.interestRate}
+        step={0.5}
+        onChange={(e, value) => setData({
+          ...data,
+          interestRate: value
+        })}
         unit="%"
-        amount={500}
+        amount={data.interestRate}
       />
     </>
   );
